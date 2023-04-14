@@ -7,5 +7,3 @@ This react app allows the user to search a Movie name, and retrieve some basic d
 To run the application, navigate to frontend/movie-app and enter "npm start" in the terminal.
 Then, in a separate terminal, navigate to the backend directory and enter "node server.js" to
 run the server.
-
-![Imgur Image](https://imgur.com/ozQjECZ.jpg)
