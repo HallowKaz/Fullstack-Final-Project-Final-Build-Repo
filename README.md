@@ -14,6 +14,7 @@ Then, in a separate terminal, navigate to the backend directory and enter "node 
 run the server.
 
 ## Preview:
-![Imgur Image](https://imgur.com/kABWKvc.jpg)
+![Imgur gif](https://imgur.com/kABWKvc.jpg)
+https://imgur.com/a/hbozay9
 
 
