@@ -1,4 +1,6 @@
 import logo from './logo.svg';
+import bookmark from './bookmark.png'
+import del from './delete.png'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, Nav, Container, Form, Button} from 'react-bootstrap'
@@ -8,6 +10,9 @@ import SearchByName from './pages/SearchByName';
 import {useState} from 'react';
 import axios from "axios";
 import Popular from './pages/Popular';
+import Favorites from './pages/Favorites';
+import handleAddClick from './pages/Add';
+import handleDeleteClick from './pages/Delete';
 
 //this component handles both the navbar and the search bar//
 function App() {
@@ -51,7 +56,7 @@ function App() {
     })
   }
 
-  function handleHomeClick(){
+  function handleNavClick(){
     setData(null);
     setError(false);
   }
@@ -64,8 +69,9 @@ function App() {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
-              <Nav.Link as={Link} to='/' onClick={handleHomeClick}>Home</Nav.Link>
-              <Nav.Link as={Link} to='/Popular'>Popular</Nav.Link>
+              <Nav.Link as={Link} to='/' onClick={handleNavClick}>Home</Nav.Link>
+              <Nav.Link as={Link} to='/Popular' onClick={handleNavClick}>Popular</Nav.Link>
+              <Nav.Link as={Link} to='/Favorites' onClick={handleNavClick}>Favorites</Nav.Link>
               {/* *add more nav links*
               <Nav.Link as={Link} to='/NowPlaying'>Display</Nav.Link>*/}
             </Nav>
@@ -88,11 +94,13 @@ function App() {
         <Route path ="/" element = {<Home />}></Route>
         <Route path ="/Popular" element={<Popular />}></Route>
         <Route path ="/SearchByName" element = {<SearchByName />}></Route>
+        <Route path ="/Favorites" element = {<Favorites />}></Route>
         {/*Add more routes */}
       </Routes>
       {error&&
         <h4 style={{color:'red', 'fontWeight': 'bold', marginLeft: '15px'}}>No movies found by that title</h4>
       }
+      {/*note: the code below will run even if the user has navigated to another pages, such as /popular. This is not intended */}
       {data&&
         <div>
         <br />
@@ -110,9 +118,11 @@ function App() {
                     <tr>
                         <td rowSpan={4}><img src={`https://image.tmdb.org/t/p/original/${info.poster_path}`} width="250" alt="movie poster" /></td>
                         <td>{info.title}</td>
+                        <td><button type="button" className="btn btn-success" onClick={()=>handleAddClick(info)}><img width='30px' alt='add' src={bookmark} /></button></td>
                     </tr>
                     <tr>
-                        <td>Release: {info.release_date}</td>
+                      <td>Release: {info.release_date}</td>
+                      <td><button type="button" className="btn btn-light" onClick={()=>handleDeleteClick(info)}><img width="30px" alt='delete' src={del}/></button></td>
                     </tr>
                     <tr>
                       <td>Rating: {info.vote_average}</td>
